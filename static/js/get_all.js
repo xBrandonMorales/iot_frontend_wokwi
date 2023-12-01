@@ -1,6 +1,6 @@
 function getAll() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'https://8000-axelcarrill-iotbackwowk-upei094zfbm.ws-us106.gitpod.io/dispositivos');
+    request.open('GET', 'https://8000-xbrandonmor-iotbackendw-nyhaix8idpd.ws-us106.gitpod.io/dispositivos');
     // request.open('GET', 'https://api-contactos-91f205878f2d.herokuapp.com/contactos');
     request.send();
 
