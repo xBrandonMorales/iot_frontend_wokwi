@@ -1,6 +1,6 @@
 function getAll() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:8000/dispositivos');
+    request.open('GET', 'https://8000-axelcarrill-iotbackwowk-upei094zfbm.ws-us106.gitpod.io/dispositivos');
     // request.open('GET', 'https://api-contactos-91f205878f2d.herokuapp.com/contactos');
     request.send();
 
@@ -30,16 +30,10 @@ function getAll() {
                 editarLink.href = "/editar?id=" + encodeURIComponent(contacto.id);
                 editarLink.innerText = "Editar ";
 
-                /*
-                var borrarButton = document.createElement("button");
-                borrarButton.innerText = "Borrar";
-                borrarButton.addEventListener("click", function () {
-                    deleteOne(contacto.email);
-                });
-                */
-
                 td_acciones.appendChild(verLink);
+                td_acciones.appendChild(document.createTextNode(" | "));  // Añade un nodo de texto
                 td_acciones.appendChild(editarLink);
+                
                 // td_acciones.appendChild(borrarButton);
 
                 tr.appendChild(td_id);
@@ -53,40 +47,4 @@ function getAll() {
             console.log("Error al cargar los dispositivos.");
         }
     };
-}
-
-function deleteOne(id) {
-    var confirmacion = confirm("¿Está seguro de eliminar este dispositivo?");
-    if (confirmacion) {
-        // Realizar una solicitud POST para eliminar el contacto
-        var request = new XMLHttpRequest();
-        request.open('DELETE', 'http://localhost:8000/dispositivos/' + encodeURIComponent(id));
-        //request.open('DELETE', 'https://api-contactos-91f205878f2d.herokuapp.com/contactos/' + encodeURIComponent(id));
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send();
-
-        request.onload = (e) => {
-            if (request.status === 200) {
-                console.log("Contacto eliminado correctamente");
-                // Actualizar la tabla eliminando la fila del contacto
-                deleteRow(id);
-            } else {
-                console.log("Error al eliminar el dispositivo.");
-            }
-        };
-    }
-}
-
-function deleteRow(email) {
-    var tbody_contactos = document.getElementById("tbody_contactos");
-    var filas = tbody_contactos.getElementsByTagName("tr");
-    
-    // Buscar la fila que contiene el contacto con el email especificado y eliminarla
-    for (var i = 0; i < filas.length; i++) {
-        var celdas = filas[i].getElementsByTagName("td");
-        if (celdas.length > 0 && celdas[0].innerHTML === email) {
-            tbody_contactos.removeChild(filas[i]);
-            break;
-        }
-    }
 }
